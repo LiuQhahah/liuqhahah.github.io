@@ -1,21 +1,21 @@
 # Site settings
-title: Hux Blog
-SEOTitle: 黄玄的博客 | Hux Blog
+title: LiuQhahah Blog
+SEOTitle: LiuQhahah的博客 | LiuQhahah Blog
 header-img: img/home-bg.jpg
-email: huxpro@gmail.com
-description: "关于前端与设计、黑客与画家 | 黄玄，Web & Mobile Lover，Software Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "黄玄, Hux黄玄, Hux, 鬼栈, huxpro, @huxpro, 黄玄的博客, Hux Blog, 博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计"
-url: "https://huangxuan.me"              # your host, for absolute URL
+email: liuqiang9596@gmail.com
+description: "heiheihei |发现更大的世界。"
+keyword: "  刘强, LiuQhahah @LiuQhahah, 刘强的博客, LiuQhahah Blog, 博客, 个人网站, 互联网, "
+url: "https://liuqhahah.top"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
 # SNS settings
 RSS: false
-weibo_username:     huxpro
-zhihu_username:     huxpro
-github_username:    huxpro
-twitter_username:   huxpro
+weibo_username:     LiuQhahah
+#zhihu_username:     huxpro
+github_username:    LiuQhahah
+twitter_username:   HELLO_QIANG
 #facebook_username:  huxpro
 # linkedin_username:  firstname-lastname-idxxxx
 
@@ -48,7 +48,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hux
+disqus_username: liuqhahah
 
 # Netease setttings
 netease_comment: false
@@ -56,19 +56,19 @@ netease_comment: false
 
 
 # Analytics settings
-# Baidu Analytics 
+# Baidu Analytics
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+ga_track_id: 'UA-113692599-1'            # Format: UA-xxxxxx-xx
+ga_domain: liuqhahah.top
 
 
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "写写代码，做做设计，<br>离开世界之前，一切都是过程"
-sidebar-avatar: /img/avatar-hux.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-about-description: " 生活不止眼前的苟且<br>过去和未来都是"
+sidebar-avatar: /img/gabi_atm.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
@@ -90,7 +90,7 @@ friends: [
     #     title: "Su",
     #     href: "http://su.gallery/"
     # },{
-        title: "乱序",
+        title: "null",
         href: "http://mida.re/"
     },{
         title: "前端外刊评论",
