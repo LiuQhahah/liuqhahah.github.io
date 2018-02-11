@@ -1,18 +1,16 @@
 ---
 layout:     post
-title:      "hello"
-subtitle:   "hello world"
-date:       2018-02-11 12:00:00
+title:      "Hello"
+subtitle:   "Hello world"
+date:       2018-02-10 12:00:00
 author:     "LiuQhahah"
-header-img: "img/gabi_atm.jpg"
+header-img: "img/post-bg-re-vs-ng2.jpg"
 header-mask: 0.3
 catalog:    true
 tags:
-
+    - 前端开发
+    - JavaScript
     - 译文
 ---
-<div>
-null
-<br>null<br>
 
-</div>
+> 这篇文章为null
