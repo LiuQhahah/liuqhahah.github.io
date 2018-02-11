@@ -1,7 +1,7 @@
 > 好好学习  
 > 好吃懒做
 
-Hey，我是LiuQhahah，null，才玩[博客](https://liuqhahah.top)
+Hey，我是LiuQhahah，null，才玩[博客](http://liuqhahah.top)
 
 
 
