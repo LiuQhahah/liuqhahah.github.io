@@ -18,7 +18,8 @@ tags:
 
 ***
 
-> 这篇文章翻译自[IBM Cloudan SQL的Docs]()。
+> 这篇文章翻译自[IBM Cloudant NoSQL的Docs](https://console.bluemix.net/docs/services/Cloudant/cloudant.html#-) 
+
 
 
 ## 概述
