@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      "Cloudant Docs  : Cloudant Offer (1)「译」"
-subtitle:   "IBM Bluemix 以及Cloudant中的新功能"
-date:       2018-02-26 16:00:00
+title:      "Cloudant Docs  : Cloudant Offer「译」"
+subtitle:   "Cloudant  NoSQL DB 套餐的分类以及计费原则，数据库优点"
+date:       2018-02-27 16:00:00
 author:     "LiuQ"
 header-img: "img/cloudant-logo.png"
 header-mask: 0.3
