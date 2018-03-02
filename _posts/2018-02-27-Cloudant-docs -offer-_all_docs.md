@@ -299,7 +299,64 @@ deleted_conflicts|返回被删的冲突版本|yes|布尔值|false
 descending|降序排列|yes|布尔值|false
 endkey|截止关键字|yes|字符串
 include_docs|范围文档所有信息|yes|布尔值|false
-inclusive_end|	
+inclusive_end|key值等于`endkey`的值的行数|yes|布尔值|true
+key|返回ID与key匹配的文件|yes|字符串
+keys|返回ID与其中一个key匹配的文件|yes|字符串序列
+limit|返回文档的个数|yes|number
+meta|包含3个参数：conflicts,deleted_confilcts,以及revs_info.当meta=true等同于conflicts=true&deleted_conflicts=true&revs_info=true.|yes|布尔值|false
+r|指定[read_quorum](https://console.bluemix.net/docs/services/Cloudant/api/document.html#quorum---writing-and-reading-data) |yes|number|2
+revs_info|所知道文档版本的所有细节信息|yes|布尔值|false
+skip|跳过多少条记录|yes|number|0
+startkey|从专有key开始返回|yes|字符串
+
+**注意**：使用`include_docs=true`会有[性能影响](https://console.bluemix.net/docs/services/Cloudant/api/using_views.html#include_docs_caveat) 
+
+
+**注意**使用`key`参数时，发送`POST`请求要比`GET`响应速度更快。
+
+命令行操作：
+
+	curl https://$ACCOUNT.cloudant.com/$DATABASE/_all_docs?keys=["somekey","someotherkey"]
+	
+
+返回的时JSON对象，包含数据库中所有匹配参数的文档。接下来的表描述了个体领域的意义：
+
+领域|描述|类型
+offset|文件列表开始的位移|number
+rows|文件对象的数组|数组
+total_rows|数据库中的文件数或匹配查询参数的view|number
+update_seq|当前更新序列|字符串
+
+
+案例：请求数据库中所有文件的响应：
+
+	{
+	    "total_rows": 3,
+	    "offset": 0,
+	    "rows": [
+		{
+		    "id": "5a049246-179f-42ad-87ac-8f080426c17c",
+		    "key": "5a049246-179f-42ad-87ac-8f080426c17c",
+		    "value": {
+		        "rev": "2-9d5401898196997853b5ac4163857a29"
+		    }
+		},
+		{
+		    "id": "96f898f0-f6ff-4a9b-aac4-503992f31b01",
+		    "key": "96f898f0-f6ff-4a9b-aac4-503992f31b01",
+		    "value": {
+		        "rev": "2-ff7b85665c4c297838963c80ecf481a3"
+		    }
+		},
+		{
+		    "id": "d1f61e66-7708-4da6-aa05-7cbc33b44b7e",
+		    "key": "d1f61e66-7708-4da6-aa05-7cbc33b44b7e",
+		    "value": {
+		        "rev": "2-cbdef49ef3ddc127eff86350844a6108"
+		    }
+		}
+	    ]
+	}
 
 
 
