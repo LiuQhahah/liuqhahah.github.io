@@ -63,7 +63,9 @@ $url 为ClouantNoSQLDB中服务凭证中的url，包含了：用户名：密码@
 
 错误情况：
 
-	liu@liu:~/mycloudant$ sudo curl https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/test -X PUT                                                   
+	liu@liu:~/mycloudant$ sudo curl https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/test -X PUT 
+	
+	                                                  
 	{"error":"unauthorized","reason":"one of _admin, server_admin is required for this request"}
 	//权限不够
 
@@ -169,6 +171,144 @@ update_seq|不透明的字符串用来描述数据表的状态，不依赖于计
     "test1"
 	]
  
+##得到设计文档（design document）
+
+通过发送`GET`到`https://$ACCOUNT.cloudant.com/$DATABASE/_design_docs`获取设计文档。
+
+HTTP操作
+
+	GET /{$DATABASE}/_design_docs
+命令行操作： 
+
+	curl https://$ACCOUNT.cloudant.com/_design_docs
+	
+	
+返回的结果
+
+	{
+    "error": "forbidden",
+    "reason": "server_admin access is required for this request"
+	}
+
+在`_design_docs`端点会返回在你指定的数据库的所有文档中的一个JOSN结构
+。返回的信息是JSON结构包含关于返回结构的元信息，包括一系列所有设计文档和他们基础内容，有ID ，版本号，key。这个key由设计文档的_id决定。
+
+**注意**在_design_docs端点中可以使用`GET`以及`POST`方法，以下是例子。
+
+`_design_docs`端点包含以下查询参数。
+
+
+查询参数|描述|选项|类型|默认值
+
+conflicts|在回复中包含冲突信息，如果_docs不为真，则忽略|Yes|布尔值|false
+descending|根据key进行降序排列|Yes|布尔值|false
+endkey|当到达指定值时，停止数据返回|Yes|字符串|null
+end_key|endkey的别号|Yes|字符串|null
+include_docs|返回设计文档的所有详细内容|Yes|布尔值
+inclusive_end|在结果中是否包含特有的key|Yes|布尔值|true
+key|返回专有key的设计文档|Yes|字符串
+keys|返回专有key的设计文档|字符串列表
+limit|限制设计文档的个数|Yes|number
+skip|在开始返回结果时跳过的记录值的个数|Yes|number
+startkey|从此key开始返回|Yes|字符串
+start_key|同startkey|字符串
+update_seq|响应包含一个更新的update_seq值表明哪一个序列ID|Yes|布尔值|false
+
+用以下的JSON对象返回结果：
+
+
+响应JSON对象|描述|类型
+offset|从设计文档哪里开始算|number
+rows|视图行对象的数组，返回的信息仅包含文档的ID以及版本号|数值
+total_rows|数据库中总行数，注：并不是请求中的行数|number
+update_seq|数据库的当前更新序列|number
+
+如果成功完成请求，状态码则是200
+
+
+>例：
+`https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/iot2040/_all_docs?inclusive_end=false&start_key=“_design“&end_key=”_design0“`
+
+
+返回结果：
+
+	{
+	total_rows: 1035547,
+	offset: 660468,
+	rows: [ ],
+	}
+
+`_all_docs`
+`inclusive_end`=false
+`start_key`="_design"
+`end_key` ="_design0"
+
+表明当前的`iot2040`数据表中的所有文档没有以关键字`_design`开始，以`_design0`结束的。inclusive_end为false/true不影响结果的产生
+
+创建过design documents之后，再次输入[链接](https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/iot2040/_all_docs?inclusive_end=false&start_key=“_design“&end_key=”_design0“) 
+例：用`GET`方法请求design documents
+
+https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/iot2040/_all_docs?inclusive_end=false&start_key=”_design“&end_key=“_design0”
+结果为：
+
+`
+{
+total_rows: 1036494,
+offset: 661090,
+rows: [
+{
+id: "_design/0c803213c8023b7398f75c52b281a01da51076fc",
+key: "_design/0c803213c8023b7398f75c52b281a01da51076fc",
+value: {
+rev: "1-a3d9d6e8096d729c0b258dd96ab59fa8"
+},
+},
+{
+id: "_design/demo",
+key: "_design/demo",
+value: {
+rev: "1-8d361a23b4cb8e213f0868ea3d2742c2"
+},
+},
+{
+id: "_design/search",
+key: "_design/search",
+value: {
+rev: "1-8fda19d078cb605016ffcee3896f9b48"
+},
+},
+{
+id: "_design/test",
+key: "_design/test",
+value: {
+rev: "1-f16e968cba5fe4d5aae9edb03d3da96d"
+},
+},
+],
+}`
+
+##Get Documents
+
+用`GET`请求`https://$ACCOUNT.cloudant.com/$DATABASE/_all_docs`列出数据库中的所有文件。
+
+在`_all_docs`后可跟以下查询参数：
+
+参数|描述|可选|类型|默认值
+conflicts|只有include_docs设置true才可以设置|yes|布尔值|false
+deleted_conflicts|返回被删的冲突版本|yes|布尔值|false
+descending|降序排列|yes|布尔值|false
+endkey|截止关键字|yes|字符串
+include_docs|范围文档所有信息|yes|布尔值|false
+inclusive_end|	
+
+
+
+
+
+
+
+
+
 
 ### 著作权声明
 
