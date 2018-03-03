@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      "Cloudant Docs : Cloudant 文档「译」"
-subtitle:   "学习非关系型数据库"
-date:       2018-02-26 16:00:00
+title:      "使用rsa密钥登录远程服务器"
+subtitle:   "保护vps的安全措施"
+date:       2018-03-02 16:00:00
 author:     "LiuQ"
-header-img: "img/cloudant-logo.png"
+header-img: "img/ssh-vps.jpeg"
 header-mask: 0.3
 catalog:    true
 tags:
