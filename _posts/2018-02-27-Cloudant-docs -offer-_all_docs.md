@@ -357,6 +357,32 @@ update_seq|当前更新序列|字符串
 		}
 	    ]
 	}
+	[design document](https://console.bluemix.net/docs/services/Cloudant/api/design_documents.html) 
+
+##Get Changes
+
+发送`GET`请求`https://$ACCOUNT.cloudant.com/$DATABASE/_changes`，返回一系列更改，在数据库中文件的更改。包括插入，更新，删除。
+
+当收到`_changes`时，数据库的每个碎片的复制版本提供一系列更改。将这些内容返回到请求的客户端。
+
+`_changes`接收以下请求参数：
+
+参数|描述|支持值|默认值
+conflicts|仅当`include_docs`为true时，每个文档的冲突信息都添加|boolean|false
+descending|以降序返回|布尔值|false
+doc_ids|过滤器设置了`_doc_ids`才有效，发送专有文档的更改情况，注：doc_ids参数仅当Cloudant NoSQL DB兼容CouchDB才可以，[详细内容](https://console.bluemix.net/docs/services/Cloudant/api/advanced.html#get-/) |文档ID的JSON数组
+feed|[细节](https://console.bluemix.net/docs/services/Cloudant/api/database.html#the-feed-argument) |"continuous","longpoll","normal"|"normal"
+filter|过滤的功能达到更新目的，filter定义在[design document](https://console.bluemix.net/docs/services/Cloudant/api/design_documents.html)|字符串|no filter
+heartbeat|当feed=longpoll或feed=continus时，在时间会发送空的线|所有可能的数字|no heartbeat
+include_docs|文档作为最后结果的一部分|布尔值|false
+limit|返回限定个数|所有的非负数|none(无限制)
+seq_interval|seq的值包含在结果中的频率，高值增加了_changes的吞吐量，减少恢复的大小。注：在非连续的_changes模式中，最后一个_seq值被移走的|	任意正数|1
+since|特定语句识别后，才返回的改变结果，[更多细节](https://console.bluemix.net/docs/services/Cloudant/api/database.html#the-since-argument) |序列识别|0
+style|在更改的数组中返回版本数，`main_only`返回当前"winning"版本，`all_docs`返回所有叶子版本，包含冲突以及被删除之前的冲突版本|main_only,all_docs|main_only
+timeout|超时门限|正数即可
+
+**注：**使用`include_docs =true`时，可能出现[ performance implications](https://console.bluemix.net/docs/services/Cloudant/api/using_views.html#include_docs_caveat) 
+
 
 
 
