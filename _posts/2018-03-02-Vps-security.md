@@ -1,34 +1,21 @@
- 
- ---
+
+---
 layout:     post
 title:      "使用RSA密钥取代密码登录SSH"
 subtitle:   "VPS的安全措施"
 date:       2018-03-02 16:00:00
 author:     "LiuQ"
-header-img: "img/ssh_vps.jpeg"
+header-img: "img/ssh-vps.jpeg"
 header-mask: 0.3
 catalog:    true
 tags:
     - RSA
-    - SSH
     - VPS
+    - SSH
     
 ---
 
----
-layout:     post
-title:      "Mongodb     教程"
-subtitle:   "Mongodb Tutorial"
-date:       2018-02-11 18:00:00
-author:     "LiuQhahah"
-header-img: "img/post-bg-mongo.png"
-header-mask: 0.3
-catalog:    true
-tags:
-    - NoSQL
-    - MongoDB
-    - 数据库
----
+
  
 本地主机：ubuntu
 远程主机：centos
