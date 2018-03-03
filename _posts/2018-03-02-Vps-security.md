@@ -1,18 +1,17 @@
-
 ---
 layout:     post
-title:      "使用RSA密钥取代密码登录SSH"
-subtitle:   "VPS的安全措施"
-date:       2018-03-02 16:00:00
+title:      "Cloudant Docs : Cloudant 文档「译」"
+subtitle:   "学习非关系型数据库"
+date:       2018-02-26 16:00:00
 author:     "LiuQ"
-header-img: "img/ssh-vps.jpeg"
+header-img: "img/cloudant-logo.png"
 header-mask: 0.3
 catalog:    true
 tags:
-    - RSA
-    - VPS
-    - SSH
-    
+    - noSQL
+    - 教程
+    - Cloudant
+    - 译文
 ---
 
 
