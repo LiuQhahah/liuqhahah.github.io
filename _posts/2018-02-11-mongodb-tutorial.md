@@ -13,9 +13,11 @@ tags:
     - 数据库
 ---
  
->  本教程以ubuntu为例
+>  本[教程](https://docs.mongodb.com/manual/mongo/) 以ubuntu为例
 
 ---------------------------------------
+
+
 
 ##启动mongo
 	
