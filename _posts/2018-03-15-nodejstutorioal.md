@@ -734,3 +734,320 @@ app.js中调用movies.js中的方法
 	liu@ubuntu:~/nodejsPro/tutorial4nodejs/10Moudles$ node app.js 
 	Emilys favorite movie is :The NoteBook
 	Emilys favorite movie is :The NoteBook
+
+
+##11 对象工厂（与10不同）
+
+-----------------------------
+new 一个对象出来，和bucky中不一样的对象，与10Moudles中比较，输出结果不同，10中的movies中，定义的是变量，对变量赋值，赋的是movies中的值，所以当emliy赋值过后，bucky中再次调用时，变量值则发生变化，但是11例中的对象不一样，emliy.js与bucky.js new出了两个Object对象，所以结果不同。
+
+当不需要共享时，可以创建不同的对象，实现独立的对象操作
+代码：
+
+
+
+	//emliy.js
+	var movies = require('./movies');
+
+
+	var emilyMovies = movies();
+	emilyMovies.favMovie = "The Notebook";
+	console.log("emilyMovies.favMovie: "+emilyMovies.favMovie);
+
+	//movies.js
+	//函数
+	module.exports = function(){
+	  return {
+	    favMovie: ""
+	  }
+	};
+
+	//bucky.js
+
+	var movies = require('./movies');
+	//new 一个对象出来
+	var buckyMovies = movies();
+	console.log("buckyMovies.favMovie: "+buckyMovies.favMovie);
+
+	//app.js
+	require('./emily');
+	require('./bucky')
+	
+	
+输出：
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/11Object$ node app.js
+	emilyMovies.favMovie: The Notebook
+	buckyMovies.favMovie: 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/11Object$
+
+**注：**与10输出结果不同
+
+##12第三方库的使用
+
+1. 
+
+`fs`:file system
+创建文件，写入内容，读取文件。
+
+	//调用第三方库时，不要加上路径，nodejs认为加了路径则是调用自己的库，
+	//而不调用系统库
+	var fs = require('fs');
+
+	 //创建文件写入内容
+	 fs.writeFileSync("corn.txt","Corn is good , corn is life");
+
+	 //读取文件内容
+	 console.log(fs.readFileSync("corn.txt").toString());
+输出结果：
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	Corn is good , corn is life
+
+2. 格式化文件路径
+
+		//格式化路径
+		var path = require('path');
+		var websiteHome = "Desktop/Bucky//thenewboston/index.html";
+
+		console.log(path.normalize(websiteHome));
+	
+输出结果：（注意输入的字符串与格式化后的不同）
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	Desktop/Bucky/thenewboston/index.html
+	
+3. 输出文件夹名，basename，extname 后缀名
+
+
+代码：
+
+	//格式化路径
+	var path = require('path');
+
+	var websiteAbout = "Desktop/Bucky/thenewboston/about.html";
+
+	//输出文件夹名，basename，extname
+	console.log(path.dirname(websiteAbout));
+	console.log(path.basename(websiteAbout));
+	console.log(path.extname(websiteAbout));
+
+结果：
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	Desktop/Bucky/thenewboston
+	about.html
+	.html
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ 
+	
+4. 循环执行
+
+代码：
+
+	//循环执行,隔2s执行一次
+	setInterval(function(){
+	  console.log("beer");
+	},2000)
+
+
+结果：
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	beer
+	beer
+	beer
+	beer
+	^C
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ 
+	
+5. 输出当前文件夹名以及文件路径
+
+
+		console.log(__dirname);
+		console.log(__filename);
+	
+	
+结果：
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	/home/liu/nodejsPro/tutorial4nodejs/12lib
+	/home/liu/nodejsPro/tutorial4nodejs/12lib/app.js
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ 
+
+##13创建server
+请求服务器时，即使只请求一些（刷新一次），但是同时会请求一次获取小图标的信息favicon.ico
+
+代码：
+
+	var http = require('http');
+
+	function onRequest(request,response){
+	  console.log("A user made a request"+request.url);
+	  response.writeHead(200,{"Context-Type":"text/plain"});
+	  response.write("Here is some data");
+	  response.end();
+	}
+
+	http.createServer(onRequest).listen(8888);
+	console.log("Server is running ...");
+
+输出结果：
+	
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/13server$ node server.js 
+	Server is running ...
+	A user made a request/
+	A user made a request/favicon.ico
+	A user made a request/
+	A user made a request/favicon.ico
+
+##14添加html请求（请求结果为404）
+
+创建index.html文件：
+
+	<!DOCTYPE html>
+	<html>
+	<head lang="en">
+	  <meta charset="utf-8">
+	  <title>thenewboston</title>
+
+	</head>
+
+	<body>
+	  Wow this site is awesome!
+	</body>
+	</html>
+
+server.js文件：
+
+	var http = require('http');
+	var fs = require('fs');
+
+	//404 response
+	function send404Response(response){
+	  response.writeHead(404,{"Content-Type":"text/plain"});
+	  response.write("Error 404 : Page not found!");
+	  response.end();
+	}
+
+	//Handle a user request
+	function onRequest(request,response){
+	  if (request.method =='GET' && request.url == '/') {
+	    //  显示html网页
+	    response.writeHead(200,{"Content-Type":"text/html"});
+	    fs.createReadStream('./index.html').pipe(response);
+	  }else {
+	    send404Response(response);
+	  }
+	}
+
+	http.createServer(onRequest).listen(8888);
+	console.log("Server is now running....");
+
+
+##15 Connect
+
+安装connect包
+
+在文件目录下，输入`npm install connect`
+
+1. 使用next参数，函数调用
+
+
+		//https://github.com/senchalabs/connect
+		var connect = require('connect');
+		var http = require('http');
+
+		var app=  connect();
+
+		//使用next参数
+		function doFirst(request,response,next){
+		  console.log("Bacon");
+		  next();
+		}
+
+		function doSecond(request,response,next){
+		console.log("Tuna");
+		next();
+		}
+
+
+		app.use(doSecond);
+		app.use(doFirst);
+
+		http.createServer(app).listen(8888);
+		console.log("Server is running...");
+
+输出结果：
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/15folder$ node server.js 
+	Server is running...
+	Tuna
+	Bacon
+
+
+
+
+2. 127.0.0.1:8888/profile 输出
+
+
+
+		//127.0.0.1:8888/profile 输出
+		function profile(request,response){
+		  console.log("User requested profile");
+		}
+
+		//127.0.0.1:8888/forum 输出
+		function forum(request,response){
+		  console.log("User request forum");
+		}
+
+		app.use('/profile',profile);
+		app.use('/forum',forum);
+
+		http.createServer(app).listen(8888);
+		console.log("Server is running...");
+	
+输出结果：
+
+		liu@ubuntu:~/nodejsPro/tutorial4nodejs/15folder$ node server.js 
+		Server is running...
+		User requested profile
+		User request forum
+
+
+##16express
+
+>参考链接：
+http://blog.ijasoneverett.com/2013/03/a-sample-app-with-node-js-express-and-mongodb-part-1/
+
+执行后，
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$ express -c stylus
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$ npm install -d
+
+生成的文件根目录：
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$ ls
+	app.js  bin  node_modules  package.json  public  routes  views
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$ 
+	
+	
+执行：bin目录下的www文件
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$ ./bin/www 
+	GET / 200 308ms - 170b
+	GET /stylesheets/style.css 200 288ms - 110b
+
+打开链接127.0.0.1:3000
+
+输出的内容是`/views/index.jade`中的内容
+
+	extends layout
+
+	block content
+	  h1= title
+	  p Welcome to #{title}
+	  
+
+
+
