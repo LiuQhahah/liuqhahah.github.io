@@ -267,13 +267,129 @@ tags:
     });
 
 
-## 12 client & Server
+## 11 client & Server
 
 客户端请求数据时，发送请求request 以及请求头request headers
 服务器回复数据时，回复response以及response headers
+
+end方法的意义：
+
+    //MUST be called on each response
+    //signal to server that all of response headers and body have been sent,
+    //server should consider this message complete
+    res.end('Hey ninjas');
+
 
 
 其中，Response headers包含两个内容
 
 - Content-Type
 - Status
+
+
+-------
+ 将txt文件的内容通过`pipes`现在在页面上，
+
+     var http = require('http');
+     var fs = require('fs');
+     var server = http.createServer(function(req,res){
+       //send a response header  to the request
+       console.log(req.url);
+       res.writeHead(200,{'Content-Type':'text/plain'});
+       var myReadStream = fs.createReadStream(__dirname + '/readMe.txt','utf8');
+       myReadStream.pipe(res);
+     });
+
+     server.listen(3000,'127.0.0.1');
+     console.log('listening ....');
+
+## 13 buffer缓存
+
+- 临时存储，
+- 缓存区存满后，传输
+- 一次传输小块数据
+
+## 14 Streams
+
+[api](https://nodejs.org/api/fs.html#fs_fs_createreadstream_path_options)
+
+- Writable Streams -将数据写入到流中
+- Readable Streams 从流中读取数据
+- 双工 写入与读取流
+
+读取文件时，一块一块读取，存到缓存中，而不是读取整个文件
+
+调用 file system 的`createReadStream`时，不填写编码参数时，返回的结果是buffer,
+
+    var myReadStream = fs.createReadStream(__dirname + '/readMe.txt');
+    liu@ubuntuos:~/NodejsPro/tutorial4nodejs2/11_client_server$ node app.js
+    new chunk received:
+    <Buffer 54 68 65 20 66 69 72 73 74 20 74 69 6d 65 20 49 20 63 61 6d 65 20 74 6f 20 74 68 69 73 20 6d 61 72 6b 65 74 2c
+    20 4d 72 2e 20 44 61 73 20 73 68 6f 77 ... >
+    new chunk received:
+    <Buffer 61 74 65 6c 79 2c 0a 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
+    20 20 20 20 20 20 20 20 20 20 20 20 20 ... >
+    new chunk received:
+    <Buffer 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
+    20 20 20 20 20 20 20 20 20 20 20 20 20 ... >
+    new chunk received:
+    <Buffer 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20
+    20 20 20 20 20 20 20 20 20 20 20 20 20 ... >
+    new chunk received:
+    <Buffer 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 65 61 63 68 20 6f 6e 65 20 61 20 6c 69
+    74 74 6c 65 20 77 6f 6f 64 65 6e 2d 66 ... >
+
+带参数(utf8编码)，返回文档内容：
+
+    var myReadStream = fs.createReadStream(__dirname + '/readMe.txt','utf8');
+
+
+## 15 Writable Streams
+
+
+当文件中内容过多时，会将文件切成多份进行处理:
+
+    var fs = require('fs');
+    var myReadStream = fs.createReadStream(__dirname + '/readMe.txt','utf8');
+    var myWriteStream = fs.createWriteStream(__dirname + '/writeMe.txt');
+    myReadStream.on('data',function(chunk){
+      console.log('new chunk received:');
+      myWriteStream.write(chunk);
+      });
+    liu@ubuntuos:~/NodejsPro/tutorial4nodejs2/11_client_server$ node app.js
+    new chunk received:
+    new chunk received:
+    new chunk received:
+    new chunk received:
+    new chunk received:
+
+
+## 16 pipes 传输速度要快于buffer
+
+
+    var fs = require('fs');
+    var myReadStream = fs.createReadStream(__dirname + '/readMe.txt');
+    var myWriteStream = fs.createWriteStream(__dirname + '/writeMe.txt');
+    //通过pipes写入
+    myReadStream.pipe(myWriteStream);
+
+**note:** createReadStream才能调用[pipe](https://nodejs.org/api/stream.html#stream_readable_pipe_destination_options)
+
+## 17 html
+
+将html文件通过fs,pipes write
+
+
+## 18 Serving JSON
+输出json文件
+
+
+
+      `//更改Content-Type 为'application/json'
+      res.writeHead(200,{'Content-Type':'application/json'});
+      var myObj = {
+        name:'Ryu',
+        job:'Ninja',
+        age:29
+      };
+      res.end(JSON.stringify(myObj));`
