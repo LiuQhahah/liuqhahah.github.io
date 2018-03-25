@@ -18,7 +18,7 @@ tags:
 
 ***
 
-> 这篇文章翻译自[IBM Cloudant NoSQL的Docs](https://console.bluemix.net/docs/services/Cloudant/cloudant.html#-) 
+> 这篇文章翻译自[IBM Cloudant NoSQL的Docs](https://console.bluemix.net/docs/services/Cloudant/cloudant.html#-)
 
 
 
@@ -35,28 +35,28 @@ tags:
 “[快速开始](https://console.bluemix.net/docs/services/Cloudant/index.html) ”使得创建与运行数据库变得可行，并学习描述数据库任务的[教程](https://console.bluemix.net/docs/services/Cloudant/tutorials/index.html) 。更多的细节的信息像数据库实例的授权，以及查询数据，均可以在	[API reference](https://console.bluemix.net/docs/services/Cloudant/api/index.html) 找到答案。
 
 
-#目录
+# 目录
 
 
-##[Cloudant NoSQL DB 产品](https://console.bluemix.net/docs/services/Cloudant/offerings/index.html#cloudant-) 
+## [Cloudant NoSQL DB 产品](https://console.bluemix.net/docs/services/Cloudant/offerings/index.html#cloudant-)
 描述了所有功能
 
 
-##[Cloudant NoSQL DB  基础](https://console.bluemix.net/docs/services/Cloudant/basics/index.html#cloudant-) 
+## [Cloudant NoSQL DB  基础](https://console.bluemix.net/docs/services/Cloudant/basics/index.html#cloudant-)
 如果你是第一次使用Cloudant或非关系型数据库，浏览这个链接可以快速地了解==基础==。它会告诉你你需要知道关于Cloudant非关系型数据库最为重要的事情，剩下的文档都是默认你已掌握了基础知识。
 
-##[客户端库](https://console.bluemix.net/docs/services/Cloudant/libraries/index.html#-) 
+## [客户端库](https://console.bluemix.net/docs/services/Cloudant/libraries/index.html#-)
 用来使用Coulant数据库开发自己的应用
 
-##[教程](https://console.bluemix.net/docs/services/Cloudant/tutorials/index.html) 
+## [教程](https://console.bluemix.net/docs/services/Cloudant/tutorials/index.html)
 更为细节的文章，展示在IBM云上使用Cloudant数据库的关键任务
 
-##[API参考](https://console.bluemix.net/docs/services/Cloudant/api/index.html)  https://github.com/cloudant-labs/slate
+## [API参考](https://console.bluemix.net/docs/services/Cloudant/api/index.html)  https://github.com/cloudant-labs/slate
 API参考全面地展示了Cloudant的功能，使用Cloudant数据库可以发现更为细节的东西。
-##[指导](https://console.bluemix.net/docs/services/Cloudant/guides/index.html) 
+## [指导](https://console.bluemix.net/docs/services/Cloudant/guides/index.html)
 包含用户用例以及更加复杂的的活动与问题。解释了数据库原理的一些重要概念
 
-#致谢
+# 致谢
 Cloudant数据库是基于“最优产品”的开源技术，对于依赖的技术，我们做了大量的提交工作，同时也开源来相关的文档，可以在github上给我们的[项目](https://github.com/cloudant-labs/slate) 提供意见与问题。
 
 

@@ -10,12 +10,12 @@ catalog:    true
 tags:
     - nodejs
     - express
- 
+
 ---
 
-##01在windows上安装
-##02 在MacOS上安装
-##03基础概念
+## 01在windows上安装
+## 02 在MacOS上安装
+## 03基础概念
 
 创建`app.js`，使用 vim或其他编辑器打开，
 
@@ -30,12 +30,12 @@ tags:
 	console.log(person);
 输出结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial/03$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial/03$ node app.js
 	{ firstname: 'Bucky', lastname: 'Roberts', age: 28 }
-	liu@ubuntu:~/nodejsPro/tutorial/03$ 
-	
-	
-2. 
+	liu@ubuntu:~/nodejsPro/tutorial/03$
+
+
+2.
 
 创建函数
 
@@ -45,17 +45,17 @@ tags:
 	}
 
 	console.log(addNumber(11,11));
-	
+
 控制台输出：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/03$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/03$ node app.js
 	22
 有意思的是，在定义的函数方法中，若为空，同时在控制台上执行函数，那么控制台输出的结果则是`undefined`
 具体代码：
 
 	//02创建函数
 	function addNumber(a,b){
-	
+
 	}
 
 	console.log(addNumber(11,11));
@@ -70,14 +70,14 @@ tags:
 	printBacon();//此时有括号，而不仅仅是变量名
 
 	setTimeout(printBacon,3000);//此时没有括号，奇怪
-	
+
 输出结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/03$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/03$ node app.js
 	Bacon is healthy ,dont believe the doctors
 	Bacon is healthy ,dont believe the doctors
 
-##04处理多个请求（）
+## 04处理多个请求（）
 
 nodejs可以处理多个请求，
 代码：
@@ -118,9 +118,9 @@ nodejs可以处理多个请求，
 	Delivered food order: 3
 	Delivered food order: 4
 	Delivered food order: 5
-	
-	
-	
+
+
+
 **补**
 nodejs的异步I/O，异步I/O的特点就是，每接收一个请求，使用异步调用处理请求，不用等待结果，可以继续运行其他操作，也就是说可以继续接受请求
 
@@ -201,7 +201,7 @@ nodejs的异步I/O，异步I/O的特点就是，每接收一个请求，使用�
 	Accept 9894request.
 	Accept 9894request.
 
-	
+
 运行`node attack.js`，输出结果：
 
 
@@ -224,7 +224,7 @@ nodejs的异步I/O，异步I/O的特点就是，每接收一个请求，使用�
 
 
 
-##5有趣的References以及==与===
+## 5有趣的References以及==与===
 
 代码：
 
@@ -242,20 +242,20 @@ nodejs的异步I/O，异步I/O的特点就是，每接收一个请求，使用�
 	//== 与===的不同
 	console.log(19=="19");
 	console.log(19==="19");
-	
+
 输出：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/5$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/5$ node app.js
 	salad
 	salad
 	true
 	false
 
- 
- ##06关于`this`范围的探讨
- 
+
+ ## 06关于`this`范围的探讨
+
  代码：
- 
+
 	 var Bucky = {
 	  printFirstName :function(){
 	    console.log("My name is Bucky");
@@ -275,10 +275,10 @@ nodejs的异步I/O，异步I/O的特点就是，每接收一个请求，使用�
 	}
 
 	doSomethingWorthless();
-	
+
 结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/6this$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/6this$ node app.js
 	My name is Bucky
 	true
 	true
@@ -312,18 +312,18 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
 	}
 
 	doSomethingWorthless();
-	
+
 输出结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/6this$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/6this$ node app.js
 
 	 I am worthless
 	{ global: [Circular],
-	  process: 
+	  process:
 	   process {
 	     title: 'node',
 	     version: 'v4.2.6',
-	     moduleLoadList: 
+	     moduleLoadList:
 	      [ 'Binding contextify',
 		'Binding natives',
 		'NativeModule events',
@@ -361,9 +361,9 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
 		'Binding pipe_wrap',
 		'Binding stream_wrap',
 		'Binding signal_wrap' ],
-		versions: 
+		versions:
 	      { http_parser: '2.5.0',
-		node: '4.2.6',	
+		node: '4.2.6',
 		v8: '4.5.103.35',
 		uv: '1.8.0',
 		zlib: '1.2.8',
@@ -373,16 +373,16 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
 		openssl: '1.0.2g-fips' },
 	     arch: 'x64',
 	     platform: 'linux',
-	     release: 
+	     release:
 	      { name: 'node',
 		lts: 'Argon',
 		sourceUrl: 'https://nodejs.org/download/release/v4.2.6/node-v4.2.6.tar.gz',
 		headersUrl: 'https://nodejs.org/download/release/v4.2.6/node-v4.2.6-headers.tar.gz' },
-	     argv: 
+	     argv:
 	      [ '/usr/bin/nodejs',
 		'/home/liu/nodejsPro/tutorial4nodejs/6this/app.js' ],
 	     execArgv: [],
-	     env: 
+	     env:
 	      { XDG_VTNR: '7',
 		LC_PAPER: 'en_US.UTF-8',
 		LC_ADDRESS: 'en_US.UTF-8',
@@ -481,7 +481,7 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
 	XAUTHORITY: '/home/liu/.Xauthority',
         _: '/usr/bin/node' },
      pid: 13395,
-     features: 
+     features:
       { debug: false,
         uv: true,
         ipv6: true,
@@ -524,14 +524,14 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
      binding: [Function: binding],
      _linkedBinding: [Function: _linkedBinding],
      _setupDomainUse: [Function: _setupDomainUse],
-     _events: 
+     _events:
       { newListener: [Function],
         removeListener: [Function],
         SIGWINCH: [Object] },
      _rawDebug: [Function],
      domain: null,
      _maxListeners: undefined,
-     EventEmitter: 
+     EventEmitter:
       { [Function: EventEmitter]
         EventEmitter: [Circular],
         usingDomains: false,
@@ -552,7 +552,7 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
      exit: [Function],
      kill: [Function],
      _eventsCount: NaN,
-     mainModule: 
+     mainModule:
       Module {
         id: '.',
         exports: {},
@@ -563,7 +563,7 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
 		paths: [Object] } },
 	  GLOBAL: [Circular],
 	  root: [Circular],
-	  Buffer: 
+	  Buffer:
 	   { [Function: Buffer]
 	     poolSize: 8192,
 	     isBuffer: [Function: isBuffer],
@@ -578,11 +578,11 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
 	  setInterval: [Function],
 	  setTimeout: [Function],
 	  console: [Getter] }
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/6this$ 
-	
-	
-	
-##7 prototype
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/6this$
+
+
+
+## 7 prototype
 
 >https://cnodejs.org/topic/5220baf4bee8d3cb1234d1c7 对prototype的讨论
 >https://github.com/mqyqingfeng/Blog/issues/2 JavaScript深入之从原型到原型链
@@ -626,11 +626,11 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
 	User.prototype.magic = 60;
 	console.log("Bucky.magic "+Bucky.magic);
 	console.log("Wendy.magic "+Wendy.magic);
-	
+
 代码输出：
 
 使用下`this`的含义，
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/7Prototype$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/7Prototype$ node app.js
 	Bucky gave 1 life to Bucky
 	Bucky gave 1 life to Wendy
 	Bucky 99
@@ -642,7 +642,7 @@ Bucky中的this，通过log输出的是`{ printFirstName: [Function] }`;
 	Wendy.magic 60
 
 
-##08模块化
+## 08模块化
 
 
 app.js中调用movies.js中的方法
@@ -668,10 +668,10 @@ app.js中调用movies.js中的方法
 
 结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/8Modules$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/8Modules$ node app.js
 	Avators: PG-13
 	Chappie: R
-	
+
 ##9对模块的改进
 
 代码：
@@ -702,12 +702,12 @@ app.js中调用movies.js中的方法
 
 输出：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/8Modules$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/8Modules$ node app.js
 	Avators
 	The Matrix
 
 
-##10模块的继承的继承
+## 10模块的继承的继承
 
 	//app.js
 	require('./emily');
@@ -731,12 +731,12 @@ app.js中调用movies.js中的方法
 
 输出结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/10Moudles$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/10Moudles$ node app.js
 	Emilys favorite movie is :The NoteBook
 	Emilys favorite movie is :The NoteBook
 
 
-##11 对象工厂（与10不同）
+## 11 对象工厂（与10不同）
 
 -----------------------------
 new 一个对象出来，和bucky中不一样的对象，与10Moudles中比较，输出结果不同，10中的movies中，定义的是变量，对变量赋值，赋的是movies中的值，所以当emliy赋值过后，bucky中再次调用时，变量值则发生变化，但是11例中的对象不一样，emliy.js与bucky.js new出了两个Object对象，所以结果不同。
@@ -772,20 +772,20 @@ new 一个对象出来，和bucky中不一样的对象，与10Moudles中比较�
 	//app.js
 	require('./emily');
 	require('./bucky')
-	
-	
+
+
 输出：
 
 	liu@ubuntu:~/nodejsPro/tutorial4nodejs/11Object$ node app.js
 	emilyMovies.favMovie: The Notebook
-	buckyMovies.favMovie: 
+	buckyMovies.favMovie:
 	liu@ubuntu:~/nodejsPro/tutorial4nodejs/11Object$
 
 **注：**与10输出结果不同
 
-##12第三方库的使用
+## 12第三方库的使用
 
-1. 
+1.
 
 `fs`:file system
 创建文件，写入内容，读取文件。
@@ -801,7 +801,7 @@ new 一个对象出来，和bucky中不一样的对象，与10Moudles中比较�
 	 console.log(fs.readFileSync("corn.txt").toString());
 输出结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js
 	Corn is good , corn is life
 
 2. 格式化文件路径
@@ -811,12 +811,12 @@ new 一个对象出来，和bucky中不一样的对象，与10Moudles中比较�
 		var websiteHome = "Desktop/Bucky//thenewboston/index.html";
 
 		console.log(path.normalize(websiteHome));
-	
+
 输出结果：（注意输入的字符串与格式化后的不同）
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js
 	Desktop/Bucky/thenewboston/index.html
-	
+
 3. 输出文件夹名，basename，extname 后缀名
 
 
@@ -834,12 +834,12 @@ new 一个对象出来，和bucky中不一样的对象，与10Moudles中比较�
 
 结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js
 	Desktop/Bucky/thenewboston
 	about.html
 	.html
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ 
-	
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$
+
 4. 循环执行
 
 代码：
@@ -852,29 +852,29 @@ new 一个对象出来，和bucky中不一样的对象，与10Moudles中比较�
 
 结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js
 	beer
 	beer
 	beer
 	beer
 	^C
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ 
-	
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$
+
 5. 输出当前文件夹名以及文件路径
 
 
 		console.log(__dirname);
 		console.log(__filename);
-	
-	
+
+
 结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ node app.js
 	/home/liu/nodejsPro/tutorial4nodejs/12lib
 	/home/liu/nodejsPro/tutorial4nodejs/12lib/app.js
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$ 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/12lib$
 
-##13创建server
+## 13创建server
 请求服务器时，即使只请求一些（刷新一次），但是同时会请求一次获取小图标的信息favicon.ico
 
 代码：
@@ -892,15 +892,15 @@ new 一个对象出来，和bucky中不一样的对象，与10Moudles中比较�
 	console.log("Server is running ...");
 
 输出结果：
-	
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/13server$ node server.js 
+
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/13server$ node server.js
 	Server is running ...
 	A user made a request/
 	A user made a request/favicon.ico
 	A user made a request/
 	A user made a request/favicon.ico
 
-##14添加html请求（请求结果为404）
+## 14添加html请求（请求结果为404）
 
 创建index.html文件：
 
@@ -944,7 +944,7 @@ server.js文件：
 	console.log("Server is now running....");
 
 
-##15 Connect
+## 15 Connect
 
 安装connect包
 
@@ -979,7 +979,7 @@ server.js文件：
 
 输出结果：
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/15folder$ node server.js 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/15folder$ node server.js
 	Server is running...
 	Tuna
 	Bacon
@@ -1006,16 +1006,16 @@ server.js文件：
 
 		http.createServer(app).listen(8888);
 		console.log("Server is running...");
-	
+
 输出结果：
 
-		liu@ubuntu:~/nodejsPro/tutorial4nodejs/15folder$ node server.js 
+		liu@ubuntu:~/nodejsPro/tutorial4nodejs/15folder$ node server.js
 		Server is running...
 		User requested profile
 		User request forum
 
 
-##16express
+## 16express
 
 >参考链接：
 http://blog.ijasoneverett.com/2013/03/a-sample-app-with-node-js-express-and-mongodb-part-1/
@@ -1029,12 +1029,12 @@ http://blog.ijasoneverett.com/2013/03/a-sample-app-with-node-js-express-and-mong
 
 	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$ ls
 	app.js  bin  node_modules  package.json  public  routes  views
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$ 
-	
-	
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$
+
+
 执行：bin目录下的www文件
 
-	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$ ./bin/www 
+	liu@ubuntu:~/nodejsPro/tutorial4nodejs/16express$ ./bin/www
 	GET / 200 308ms - 170b
 	GET /stylesheets/style.css 200 288ms - 110b
 
@@ -1047,7 +1047,3 @@ http://blog.ijasoneverett.com/2013/03/a-sample-app-with-node-js-express-and-mong
 	block content
 	  h1= title
 	  p Welcome to #{title}
-	  
-
-
-

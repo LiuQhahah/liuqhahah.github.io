@@ -18,7 +18,7 @@ tags:
 
 ***
 
-> 这篇文章翻译自[IBM Cloud Databases](https://console.bluemix.net/docs/services/Cloudant/api/database.html#get-documents) 
+> 这篇文章翻译自[IBM Cloud Databases](https://console.bluemix.net/docs/services/Cloudant/api/database.html#get-documents)
 
 
 针对IBM Cloudant数据库包含JSON对象，这些json对象被称为文件，所有的文件都存储在一个数据库中。
@@ -29,43 +29,43 @@ tags:
 
 Cloudant NoSQL DB也支持数据仓库。
 
-#1.创建
+# 1.创建
 
  通过发送`PUT`请求到`https://$ACCOUNT.cloudant.com/$DATABASE`创建数据库。
  数据库的名称要以小写开始，只能包含以下字符：
- 
+
  1. 小写字母（a-z）
  2. 数字（0-9）
  3. _,$,(,),+,-,/
- 
+
  案例：
- 
+
  1. 使用`HTTP`创建数据库(不会实现)
- 
+
 	 	PUT /$DATABASE HTTP/1.1
-	
+
 		HOST: $ACCOUNT.cloudant.com
-		
+
 通过Postman（chrome的一个插件，另行安装），输入如下相同的url，选择`PUT`，点击`Send`按钮后，出现
-	
+
 	{
     "ok": true
 	}
 表明成功创建，在Cloudant 账户界面上，同样看到新创建的数据表。
-	
+
  2. 使用命令行创建数据库：
-	
+
 		liu@liu:~/mycloudant$ sudo curl https://$url/test -X PUT
-		[sudo] password for liu: 
+		[sudo] password for liu:
 		{"ok":true}
-	
+
 $url 为ClouantNoSQLDB中服务凭证中的url，包含了：用户名：密码@用户名.cloudant.com。
 
 错误情况：
 
-	liu@liu:~/mycloudant$ sudo curl https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/test -X PUT 
-	
-	                                                  
+	liu@liu:~/mycloudant$ sudo curl https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/test -X PUT
+
+
 	{"error":"unauthorized","reason":"one of _admin, server_admin is required for this request"}
 	//权限不够
 
@@ -99,12 +99,12 @@ $url 为ClouantNoSQLDB中服务凭证中的url，包含了：用户名：密码@
 使用命令行进行操作：
 
 	curl https://$ACCOUNT.cloudant.com/$DATABASE \
-	
+
 	liu@liu:~/mycloudant$ sudo curl https://$ACCOUNT.cloudant.com/test
-	[sudo] password for liu: 
+	[sudo] password for liu:
 	{"update_seq":"0-g1AAAAQneJzLYWBgEMhgTmHQTElKzi9KdUhJMtZLytVNTtYtLdYtzi8tydA1MNZLzskvTUnMK9HLSy3JAWphSmRI4v___39WIgNIsxZcs6ERMbqTBIBkkjzCAITtlkTpVwDp18em34Qo_QYg_fbY9BPl-yQHkH5_CgIgAGRAPPkBkADSn09-ABSA9NeTHQB5LECSoQFIAY3oJzMQIIZMgBgyn7yAgJixAGLGevICA2LGBogZ-ykJkAMQM85TFCAXIIbcpyRAHkDMeE9JgHyAmAFKIVkA0XpbhQ","db_name":"test","sizes":{"file":68292,"external":0,"active":0},"purge_seq":0,"other":{"data_size":0},"doc_del_count":0,"doc_count":0,"disk_size":68292,"disk_format_version":6,"data_size":0,"compact_running":false,"cluster":{"q":16,"n":3,"w":2,"r":2},"instance_start_time":"0"}
-	liu@liu:~/mycloudant$ 
-	
+	liu@liu:~/mycloudant$
+
 下表显示了想要返回的元素结构：
 
 
@@ -121,10 +121,10 @@ purge_seq|在数据表中清除操作的次数
 sizes|JSON对象，包含file,external,active 大小。active是存储字节数。external是解压缩用户数据的字节大小，这个值是技术数据大小。other/data_size部分是external部分的别名。file是存储在存盘中的数据的字节数。`Index`不在计算中，disk_size也是file的别名，它的大小是等待压缩的大小。
 update_seq|不透明的字符串用来描述数据表的状态，不依赖于计算更新次数的字符串
  通过`GET`获取数据库信息
- 
+
  	curl https://$ACCOUNT.cloudant.com/$DATABASE \
  结果如下
- 
+
  	{
     "update_seq": "0-g1AAAAQneJzLYWBgEMhgTmHQSklKzi9KdUhJMjTSS8rVTU7WLS3WLc4vLcnQNTDWS87JL01JzCvRy0styQHqYUpkSOL___9_ViIDSLcmXLclMZqTBIBkkjw2_SZE6VcA6dfHpt-YKP0GIP32CP2k-j7JAWSAP_kBEADSH09-ACSA9OeTHwAFIP315AdAHguQZGgAUkAz-skLBIgZEyBmzCcvICBmLICYsZ68wICYsQFixn6KAuQAxJDzlATIBYgZ9ykJkAcQM95TEiAfIGaAUkgWALT8W4U",
     "db_name": "test1",
@@ -151,38 +151,38 @@ update_seq|不透明的字符串用来描述数据表的状态，不依赖于计
     },
     "instance_start_time": "0"
 	}
-	
-##获取数据库中所有的数据表
+
+## 获取数据库中所有的数据表
 通过`GET	`发送`https://$ACCOUNT.cloudant.com/_all_dbs`可以得到数据库所有数据信息
 
 通过`HTTP`获取所有信息（未实现）
-	
+
 	GET /_all_dbs HTTP/1.1
 
 在命令行下操作：
 
 	curl https://$ACCOUNT.cloudant.com/_all_dbs \
  以JSON数组形式返回，结果为4个表
- 
+
  	[
     "iot2040",
     "nodered",
     "test",
     "test1"
 	]
- 
-##得到设计文档（design document）
+
+## 得到设计文档（design document）
 
 通过发送`GET`到`https://$ACCOUNT.cloudant.com/$DATABASE/_design_docs`获取设计文档。
 
 HTTP操作
 
 	GET /{$DATABASE}/_design_docs
-命令行操作： 
+命令行操作：
 
 	curl https://$ACCOUNT.cloudant.com/_design_docs
-	
-	
+
+
 返回的结果
 
 	{
@@ -245,7 +245,7 @@ update_seq|数据库的当前更新序列|number
 
 表明当前的`iot2040`数据表中的所有文档没有以关键字`_design`开始，以`_design0`结束的。inclusive_end为false/true不影响结果的产生
 
-创建过design documents之后，再次输入[链接](https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/iot2040/_all_docs?inclusive_end=false&start_key=“_design“&end_key=”_design0“) 
+创建过design documents之后，再次输入[链接](https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/iot2040/_all_docs?inclusive_end=false&start_key=“_design“&end_key=”_design0“)
 例：用`GET`方法请求design documents
 
 https://79f006ec-e65c-4ab0-9280-9d5701534e3f-bluemix.cloudant.com/iot2040/_all_docs?inclusive_end=false&start_key=”_design“&end_key=“_design0”
@@ -287,7 +287,7 @@ rev: "1-f16e968cba5fe4d5aae9edb03d3da96d"
 ],
 }`
 
-##Get Documents
+## Get Documents
 
 用`GET`请求`https://$ACCOUNT.cloudant.com/$DATABASE/_all_docs`列出数据库中的所有文件。
 
@@ -309,7 +309,7 @@ revs_info|所知道文档版本的所有细节信息|yes|布尔值|false
 skip|跳过多少条记录|yes|number|0
 startkey|从专有key开始返回|yes|字符串
 
-**注意**：使用`include_docs=true`会有[性能影响](https://console.bluemix.net/docs/services/Cloudant/api/using_views.html#include_docs_caveat) 
+**注意**：使用`include_docs=true`会有[性能影响](https://console.bluemix.net/docs/services/Cloudant/api/using_views.html#include_docs_caveat)
 
 
 **注意**使用`key`参数时，发送`POST`请求要比`GET`响应速度更快。
@@ -317,7 +317,7 @@ startkey|从专有key开始返回|yes|字符串
 命令行操作：
 
 	curl https://$ACCOUNT.cloudant.com/$DATABASE/_all_docs?keys=["somekey","someotherkey"]
-	
+
 
 返回的时JSON对象，包含数据库中所有匹配参数的文档。接下来的表描述了个体领域的意义：
 
@@ -357,9 +357,9 @@ update_seq|当前更新序列|字符串
 		}
 	    ]
 	}
-	[design document](https://console.bluemix.net/docs/services/Cloudant/api/design_documents.html) 
+	[design document](https://console.bluemix.net/docs/services/Cloudant/api/design_documents.html)
 
-##Get Changes
+## Get Changes
 
 发送`GET`请求`https://$ACCOUNT.cloudant.com/$DATABASE/_changes`，返回一系列更改，在数据库中文件的更改。包括插入，更新，删除。
 
@@ -381,12 +381,12 @@ since|特定语句识别后，才返回的改变结果，[更多细节](https://
 style|在更改的数组中返回版本数，`main_only`返回当前"winning"版本，`all_docs`返回所有叶子版本，包含冲突以及被删除之前的冲突版本|main_only,all_docs|main_only
 timeout|超时门限|正数即可
 
-**注：**使用`include_docs =true`时，可能出现[ performance implications](https://console.bluemix.net/docs/services/Cloudant/api/using_views.html#include_docs_caveat) 
+**注：**使用`include_docs =true`时，可能出现[ performance implications](https://console.bluemix.net/docs/services/Cloudant/api/using_views.html#include_docs_caveat)
 
 使用`HTTP`获取数据库中更改的文件
-	
+
 	GET /$DATABASE/_changes HTTP/1.1
-	
+
 使用命令行操作
 
 	curl https://$ACCOUNT.cloudant.com/$DATABASE/	_changes \
@@ -682,19 +682,19 @@ timeout|超时门限|正数即可
     "last_seq": "10-g1AAAAW_eJzLYWBgEMhgTmHQSklKzi9KdUhJMjTUS8rVTU7WLS3WLc4vLcnQNTDWS87JL01JzCvRy0styQHqYUpkSOL___9_VgZzImMuUIDdxMDAwCg5hSSTQBZrIpQTY2-SAJBMkgdZnciAqt-CKP0KIP362PSbEqXfAKTfHup1JrDXLRITLZOT00gxi5wgT3IAWe2PEurJKeYGpom0D_UAkNXx2ELNhCj9CSD9-eSHegFIfz2K1y1TUxIt0yxoHep5LECSoQFIAW3vx3A-CWZMgJgxn7yECzFjAcSM9YhgME9JtjQ1NyXFPDIiAGL7Bojt-xFJPy3NNDHJhOZJH2L9AYj15ymJhAsQM-5TEgkPIGa8Jy8tQ8z4ADEDqRQxSbGwMEhJIsW8LACNttrI",
     "pending": 1116267
 	}
-	
-	
+
+
 -----------------------
 
 
 
-###在分布式数据库中的更改
+### 在分布式数据库中的更改
 Cloudant NoSQL DB数据库是分布式的，他们有共享和容错的符号，这些符号意味着导致`_changes`返回的结果不同于你期待的那样。
 
-尤其是在请求中得到返回的信息，使用了`_since`对一个序列识别。在序列识别检测变化之前，可以得到变化的信息。这些额外变化的原因，以及对应用的意义，在[复制指南](https://console.bluemix.net/docs/services/Cloudant/guides/replication_guide.html#how-does-replication-affect-the-list-of-changes?) 
+尤其是在请求中得到返回的信息，使用了`_since`对一个序列识别。在序列识别检测变化之前，可以得到变化的信息。这些额外变化的原因，以及对应用的意义，在[复制指南](https://console.bluemix.net/docs/services/Cloudant/guides/replication_guide.html#how-does-replication-affect-the-list-of-changes?)
 
 
-**注：**任何应用使用`_changes`请求时，必须正确处理一系列变化，这些变化可能是：
+**注：** 任何应用使用`_changes`请求时，必须正确处理一系列变化，这些变化可能是：
 
 - 比起统一信息的较早的请求，这些变化都在回复中列出来，对于更改有不同的顺序。
 
@@ -729,12 +729,12 @@ Cloudant NoSQL DB数据库是分布式的，他们有共享和容错的符号，
 
 
 	{"last_seq":"10-g1AAAAUPeJzLYWBgEMhgTmHQTElKzi9KdUhJMtJLytVNTtYtLdYtzi8tydA1MNZLzskvTUnMK9HLSy3JAWphSmRI4v___39WIgNIsxZcs6EBMbqTBIBkkjzCAITt5kTpVwDp1wfpz2BOZMoF8tjNUkySUy1SSDEL1WYzomw2ANlsj83lRIVbkgNIvz8FQRcAMiCe_KBLAOnPhwYdCzjoTBNNki2Sk2gddAUgm-vJDro8FiDJ0ACkgEb0kxl8EEMmQAyZT14QQsxYADFjPSIFWqamJloYmNE4GCG2b4DYvp-SoDwAMeM8RUF5AWLIfUqC8gHEjPeIoEyxNDE2S0mmS1B-gNgOSpVZAMQCpAo","pending":1120011}
-	
-	
-###filter 参数
+
+
+### filter 参数
 
 filter参数指定一个预定义过滤功能应用在chang反馈上。并且，以下参数是可以过滤的：
-	
+
 - `_design`:仅针对于design document
 
 - `_doc_ids`:仅接收来自doc_ids参数是特有的文件ID的变化
@@ -747,7 +747,7 @@ filter参数指定一个预定义过滤功能应用在chang反馈上。并且，
 
 - `view`:存在[map 功能](https://console.bluemix.net/docs/services/Cloudant/api/creating_views.html#a-simple-view) 可以使用
 
-###since参数
+### since参数
 
 当`since`为0时，请求返回的时所有的变化，`since`为`now`时，请求是从当前时间的所有变化。
 
@@ -760,10 +760,10 @@ Cloudant NoSQL DB自带的分布式特性可以影响回复的结果。比如，
 
 如果请求几次的`_changes`时，你的应用必须可以处理多次请求的回复。
 
-更多关于`_changes`的内容可参见[Replication](https://console.bluemix.net/docs/services/Cloudant/guides/replication_guide.html#how-does-replication-affect-the-list-of-changes?) 
+更多关于`_changes`的内容可参见[Replication](https://console.bluemix.net/docs/services/Cloudant/guides/replication_guide.html#how-does-replication-affect-the-list-of-changes?)
 
 
-###_changes请求的回复
+### _changes请求的回复
 _changes返回的是JSON对象，包含着一系列数据库文档中的changes。接下来的表格描述每个filed的含义：
 
 Fileds|描述|类型
@@ -792,7 +792,7 @@ seq|更新序列的识别号|字符串
 	    "pending": 0
 	}
 
-###关于_changes的注意事项
+### 关于_changes的注意事项
 
 - 通过_changes返回的结果是部分排序的。换句话说，多个请求时有的排序可能就不存在。获取当前的列表可以通过在_changes中包含last_changes。结果列表为使用自查询参数的后续_changes列表提供了起点。
 - 尽管相同范围的分片副本包含相同的数据，但它们的_changes历史记录通常是唯一的。 这种差异是写入如何应用于碎片的结果。 例如，它们可能以不同的顺序应用。 为确保所有更改都按照您的指定顺序进行报告，可能需要进一步回溯到碎片的历史记录以找到合适的起点。 然后从该起点报告更改。 这种“回滚”可能会导致重复更新的出现，或者更新显然在指定的以后的值之前。
@@ -800,46 +800,46 @@ seq|更新序列的识别号|字符串
 
 - 序列值对于分片是唯一的，但在分片之间可能会有所不同。 这种变化意味着如果您拥有来自不同分片的序列值，则不能认为相同的序列值引用了不同分片中的同一文档。
 
-###Using POST to get changes
+### Using POST to get changes
 
 您也可以使用POST来查询更改提要，而不是使用GET。 唯一的区别是，如果您正在使用POST，并且您正在使用docs_ids或选择器过滤器，则可以将“doc_ids”：[...]或“selector”：{...}中的部分包含在 请求正文。 预期所有其他参数都在查询字符串中，与使用GET相同。
 
 命令行操作：
 
 	curl -X POST "https://$ACCOUNT.cloudant.com/$DATABASE/_changes?filter=_selector" -d @request.json
-	
+
 返回结果：
 
 	{
     "selector": {"z" : {"$gte" : 1}}
 	}
-	
+
 实际结果：
-	
+
 	{
     "error": "bad_content_type",
     "reason": "Content-Type must be application/json"
 	}
 
-##Deleting a database
+## Deleting a database
 
 使用`DELETE`请求
 
 	curl https://$ACCOUNT.cloudant.com/$DATABASE \
     -X DELETE \
-    
-    
- ###Backing up
- [恢复数据](https://console.bluemix.net/docs/services/Cloudant/guides/backup-guide.html#-) 
- 
- 
- 
- ##Creating database applications
- 
+
+
+ ### Backing up
+ [恢复数据](https://console.bluemix.net/docs/services/Cloudant/guides/backup-guide.html#-)
+
+
+
+ ## Creating database applications
+
  除了存储在数据库文档中的数据之外，您还可能在数据库中的文档中包含客户端应用程序代码。 应用程序代码通常使用JavaScript编写。 存储在数据库中的数据和客户端代码的两层组合称为[CouchApps](https://console.bluemix.net/docs/services/Cloudant/guides/couchapps.html#couchapp) 。
- 
- 
- 
+
+
+
 ### 著作权声明
 
 

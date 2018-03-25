@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Shadowsocks  zai ubuntu peizhixian de wenti  "
+title:      "Shadowsocks    "
 subtitle:   "Hello world"
 date:       2018-03-20 12:00:00
 author:     "LiuQhahah"
