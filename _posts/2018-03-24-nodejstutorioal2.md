@@ -393,3 +393,58 @@ end方法的意义：
         age:29
       };
       res.end(JSON.stringify(myObj));`
+
+## 21 package.json 文件
+
+- What does the --save option mean?\
+
+
+>[stackoverflow对参数-save的解释](https://stackoverflow.com/questions/19578796/what-is-the-save-option-for-npm-install)
+
+`npm install express -save` 中的`-save`作用，执行上述命令安装express的同时也会在package.json文件中，添加`  "dependencies": {
+    "express": "^4.16.3"
+  }`,即使卸载express后，此信息仍在package.json中，设为依赖项。
+
+- install nodemon
+
+[nodemon 是一款非常实用的工具，用来监控 NodeJS 源代码的任何变化和自动重启你的服务器，这样我们只需要刷新页面就能看到你的改动](http://bubkoo.com/2014/12/02/use-nodemon-with-node-applications/)
+
+省得更改代码后，再重启服务器，自动帮你重启了：
+
+
+    [nodemon] starting `node app.js`
+    [nodemon] restarting due to changes...
+    [nodemon] starting `node app.js`
+    [nodemon] restarting due to changes...
+    [nodemon] starting `node app.js`
+
+## 23 express
+
+1 HTTP方法
+
+- GET  
+- POST
+- DELETE
+- PUT
+
+
+2 响应Requests
+
+- GET app.get('route',fn)
+- POST app.post('route',fn)
+- DELETE app.delete('route',fn)
+
+
+## 24 Route
+
+### code
+    app.get('/profile/:id', function(req,res){
+      res.send('You requested to see a profile with the id of ' + req.params.id);
+    });
+
+### 输入：
+
+http://127.0.0.1:3000/profile/liuqhttp://127.0.0.1:3000/profile/liuq
+
+### 页面显示：
+You requested to see a profile with the id of liuq
