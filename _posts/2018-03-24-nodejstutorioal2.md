@@ -435,7 +435,24 @@ end方法的意义：
 - DELETE app.delete('route',fn)
 
 
-## 24 Route
+## 24 Route(Express)
+-------------------
+
+- [API :app.get()](http://expressjs.com/en/api.html#app.get.method)
+
+
+- [API : res.send()](http://expressjs.com/en/api.html#res.send)
+
+>send参数中可发送，Buffer，String，Object ,数组
+
+    res.send(new Buffer('whoop'));
+    res.send({ some: 'json' });
+    res.send('<p>some html</p>');
+    res.status(404).send('Sorry, we cannot find that!');
+    res.status(500).send({ error: 'something blew up' });
+
+
+
 
 ### code
     app.get('/profile/:id', function(req,res){
@@ -448,3 +465,250 @@ http://127.0.0.1:3000/profile/liuqhttp://127.0.0.1:3000/profile/liuq
 
 ### 页面显示：
 You requested to see a profile with the id of liuq
+
+
+## 25 模板引擎(Templating Engines)part1
+
+
+- [API : res.sendFile()](http://expressjs.com/en/api.html#res.sendFile)
+
+
+#### example:
+
+请求`127:0.0.1:3000/liuq/hello.jpg`，则将位于/uploads/liuq/hello.jpg(更多的是填写类似与index.html的文件)显示在页面中：
+
+
+    app.get('/user/:uid/photos/:file', function(req, res){
+      var uid = req.params.uid
+        , file = req.params.file;
+
+      req.user.mayViewFilesFrom(uid, function(yes){
+        if (yes) {
+          res.sendFile('/uploads/' + uid + '/' + file);
+        } else {
+          res.status(403).send("Sorry! You can't see that.");
+        }
+      });
+    });
+比如：通过sendfile显示界面：
+
+    var app = express();
+    app.get('/',function(req,res){
+      //res.send('this is the home page');
+      res.sendFile(__dirname+ '/index.html')
+    });
+
+
+- 安装`ejs`
+
+
+    npm install ejs -save
+
+- 设置express框架中的view engines 为ejs
+
+
+    app.set('view engine','ejs');
+
+- ejs中传参的问题
+
+前端profile.ejs:中的person,与后端person一致
+
+    <body>
+      <h1>Welcome to the profile of <%= person %></h1>
+      <p>You wont find a website better anywhere else!</p>
+    </body>
+
+后端将输入的name转化为渲染需要的person:
+
+    app.get('/profile/:name', function(req,res){
+      //res.send('You requested to see a profile with the id of ' + req.params.id);
+      res.render('profile',{person: req.params.name});
+    });
+
+[res.render:用法](https://expressjs.com/en/api.html#res.render)Renders a view and sends the rendered HTML string to the client
+
+- 后端插入数据(name,data.age,data.job)，前端显示数据
+
+
+    app.get('/profile/:name', function(req,res){
+      var data = {age:29,job:'ninja'};
+      res.render('profile',{person: req.params.name,data:data});
+    });
+
+    <body>
+      <h1>Welcome to the profile of <%= person %></h1>
+      <p><strong>Age: </strong><%= data.age %></p>
+      <p><string>Job: </strong><%= data.job %></p>
+    </body>
+
+## 26 模板引擎(Templating Engines)part2
+
+[HTML中`h`,`p`,`li`,`ul`的含义：](https://www.w3.org/community/webed/wiki/HTML/Training/Basic_content)
+
+
+### Heading
+***
+
+
+    <h1>h1 example</h1>
+    <h2>h2 example</h2>
+    <h3>h3 example</h3>
+    <h4>h4 example</h4>
+    <h5>h5 example</h5>
+    <h6>h6 example</h6>
+
+![alt text](https://www.w3.org/community/webed/wiki/images/4/44/Tr_hn01.png "Logo Title Text 1")
+
+### Paragraph
+***
+
+    <p>This is paragraph 1</p>
+    <p>This is paragraph 2</p>
+
+![alt text](https://www.w3.org/community/webed/wiki/images/8/8a/Tr_p01.png "Logo Title Text 1")  
+
+### Line
+***
+
+    <p>This is paragraph 1</p>
+    <hr>
+    <p>This is paragraph 2</p>
+
+![alt text](https://www.w3.org/community/webed/wiki/images/0/0f/Tr_hr01.png "Logo Title Text 1")
+
+### List
+***
+
+#### unordered list(无序) ul,li
+
+
+
+  <ul>
+    <li>List 1</li>
+    <li>List 2</li>
+    <li>List 3</li>
+  </ul>
+
+![alt text](https://www.w3.org/community/webed/wiki/images/6/6c/Tr_ul01.png "Logo Title Text 1")
+
+
+- [数组的foreach 处理](https://stackoverflow.com/questions/29190925/how-to-array-of-objects-in-template-ejs)：
+
+
+    <body>
+      <h1>Welcome to the profile of <%= person %></h1>
+      <p><strong>Age: </strong><%= data.age %></p>
+      <p><string>Job: </strong><%= data.job %></p>
+
+      <h2>Hobbies</h2>
+      <ul>
+        <% data.hobbies.forEach(function(item){%>
+          <li><%= item %></li>
+        <%});%>
+      </ul>
+    </body>
+
+## 27 链接的跳转
+
+
+`partials/nav.ejs`:存放两个链接
+
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    index.ejs中嵌入<nav.ejs>
+    <body>
+      <% include partials/nav.ejs %>
+      <h1>Welcome to the most awesome website on the net</h1>
+      <p>You wont find a website better anywhere else!</p>
+    </body>
+
+## 28 Middleware 中间层
+
+#### [app.use()](https://expressjs.com/en/4x/api.html#app.use)作用：
+Mounts the specified middleware function or functions at the specified path: the middleware function is executed when the base of the requested path matches path.
+******
+
+    var express = require('express');
+    var app = express();
+    app.get("/", function(httpRequest, httpResponse, next){
+        httpResponse.write("Hello");
+        // next(); //remove this and see what happens
+    });
+    app.get("/", function(httpRequest, httpResponse, next){
+        httpResponse.write(" World !!!");
+        httpResponse.end();
+    });
+
+
+    app.listen(8080);
+
+#### 中`next()`作用：
+
+- 没有注释 `next()`运行效果:页面显示"Hello World  !!!"
+- 注释`next()`后，error:"This page isn’t working"
+
+**A route handler must end the request or call the next route handler.
+路由要么以end结束请求，要么只向下一路由的handler
+**
+
+[参考1:中间件教程](http://qnimate.com/express-js-middleware-tutorial/)
+
+[参考2:stackoverflow](https://stackoverflow.com/questions/10695629/what-is-the-parameter-next-used-for-in-express)
+
+next()用来调用处理下一个路径的路由。
+
+
+1 导入`css`文件，
+
+    var app = express();
+    app.use('/assets',express.static('assets'));  
+
+导入成功后，网页中的主题格式可以正确显示。
+
+
+## 29 Query String
+
+[API:req.query()](https://expressjs.com/en/4x/api.html#req.query)
+
+打印出`query`:
+
+    app.get('/contact',function(req,res){
+      console.log(req.query);
+      res.render('contact');
+    });
+服务运行后，浏览器输入：`http://127.0.0.1:3000/contact?dept=marketing&person=joe`
+
+控制台输出:
+
+    { dept: 'marketing', person: 'joe' }
+
+
+- query输入名字，职位，前端显示出来：
+
+
+    app.get('/contact',function(req,res){
+      // console.log(req.query);
+      res.render('contact',{qs:req.query});
+    });
+
+  前端：
+
+  <form id = "contact-form">
+    <label for = "Who">Who do you want to contact?</label>
+    <input type="text" name = "who" value="<%= qs.person %>">
+    <label for="department">Which department?</label>
+    <input type="text" name="department" value="<%= qs.dept %>">
+    <label for="email">Your email</label>
+    <input type="email" name="email"/>
+    <input type="submit" value="submit"/>
+  </form>
+
+  输入：
+  http://127.0.0.1:3000/contact?dept=IT&person=joe
+
+## 30 POST 请求 requests
