@@ -22,7 +22,7 @@ tags:
 ## 4.global object
 
 输出文件目录，文件所在目录，`__filename`,`__dirname`,
-
+```js
     //延迟函数
     setTimeout(function(){
        console.log('3 seconds have passed ');
@@ -40,7 +40,7 @@ tags:
          clearInterval(timer);
        }
        },2000);
-
+```
 ## 5 函数表达式
 
 
@@ -711,4 +711,33 @@ next()用来调用处理下一个路径的路由。
   输入：
   http://127.0.0.1:3000/contact?dept=IT&person=joe
 
-## 30 POST 请求 requests
+## 30 POST 请求 (requests)
+
+#### [app.post() Express API](https://expressjs.com/en/api.html#app.post.method) 使用指定的回调函数将HTTP POST请求路由到指定的路径。
+
+
+- POST 请求时使用
+- 请求服务器接收/存储数据
+- 经常在点击提交时，使用
+
+#### GET一般用于获取/查询资源信息，而POST一般用于更新资源信息。
+
+```js
+app.get('/contact',function(req,res){
+   console.log("get: "+req.query);
+  res.render('contact',{qs:req.query});
+});
+
+//post方法，和前端的'post'；‘contact’也和前端的'/contact'一一对应
+app.post('/contact',urlencodedParser,function(req,res){
+  //req从前端获取数据
+  console.log(req.body);
+  res.render('contact-success',{data:req.body});
+});
+
+```
+
+##### 输入127.0.0.1:3000 先执行get,跳转到contact，点击submit 按钮后，执行post，更新内容，跳转到contact-success
+
+    get: {}
+    { who: 'liuq', department: 'IT', email: 'liuq@liuq' }
